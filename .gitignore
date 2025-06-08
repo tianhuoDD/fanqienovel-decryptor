@@ -5,3 +5,5 @@ __pycache__
 .env
 # 忽略日志文件
 logs
+
+output

@@ -18,9 +18,29 @@
 
 ---
 
-## 📥 使用方式（待补充）
+## 📥 使用方式
 
-> 示例命令或调用方式将根据你的代码结构进一步完善。
+### ✨ 项目结构
+
+```python
+fanqie_novel_spider/
+│
+├── .gitignore               # git忽略文件
+├── README.md                # 项目说明文档
+├── requirements.txt         # 依赖列表
+├── run.py                   # 主运行脚本
+│
+├── config/                  # 配置文件
+│   └── headers.py           # 请求头、Cookie 等配置
+│
+├── dicts/                   # 存放映射字典文件
+│   └── font_map.py          # 解密字体映射字典
+│    
+└── utils/
+    └── common_tools.py      # 公共的通用方法
+```
+
+
 
 ---
 

@@ -1,0 +1,8 @@
+# EditorConfig is awesome: https://EditorConfig.org
+# 项目根目录下的 .editorconfig 文件
+root = true
+
+# 适用于所有类型的文件
+[*]
+end_of_line = lf
+charset = utf-8
