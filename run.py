@@ -34,7 +34,7 @@ def download_chapters(book_title, titles, urls):
     output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)  # 确保输出目录存在
     file_path = os.path.join(output_dir, f"{book_title}.txt")
-    print(f"开始下载小说《{book_title}》")
+    print(f"🎁 开始下载小说《{book_title}》")
     with open(file_path, "w", encoding="utf-8") as f:
         for title, link in zip(titles, urls):
             full_url = 'https://fanqienovel.com' + link
@@ -49,6 +49,7 @@ def download_chapters(book_title, titles, urls):
             f.write(f"\n\n{title}\n\n")
             f.write(decrypted_text)
             print(f"✅ 已下载：{title}")
+    print(f"🎉 已保存至：{file_path}")
 
 
 if __name__ == "__main__":
