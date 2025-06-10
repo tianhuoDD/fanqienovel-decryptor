@@ -5,5 +5,9 @@ __pycache__
 .env
 # 忽略日志文件
 logs
-
+# 忽略打包文件
 output
+build
+dist
+*.spec
+

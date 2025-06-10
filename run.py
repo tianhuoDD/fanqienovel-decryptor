@@ -43,6 +43,8 @@ def download_chapters(book_title, titles, urls):
                 print(f"[x] 章节《{title}》请求失败，已跳过")
                 continue
             selector = parsel.Selector(html)
+            print(selector)
+            print(full_url)
             content_list = selector.css('.muye-reader-content-16 p::text').getall()
             raw_text = '\n'.join(content_list)
             decrypted_text = decrypt_text(raw_text)
@@ -63,14 +65,29 @@ if __name__ == "__main__":
         print("[x] 小说页面解析失败，程序终止。")
     else:
         book_title, chapter_titles, chapter_urls = result
-        # 循环确认用户输入是否为 Y 或 N
+        for i, (title, url) in enumerate(zip(chapter_titles, chapter_urls), start=1):
+            print(f"{i}. {title} - {url}")
         while True:
-            yesno = input("请确认是否下载【y/n】：").strip().upper()
-            if yesno in ['', 'Y']:
+            user_input = input("请输入要下载的章节范围（如 1-220 或 all）：").strip().lower()
+            if user_input == "all":
                 download_chapters(book_title, chapter_titles, chapter_urls)
                 break
-            elif yesno == 'N':
-                print("下载已取消。")
-                break
+            elif "-" in user_input:
+                try:
+                    start_str, end_str = user_input.split("-")
+                    start_idx = int(start_str) - 1  # 转换为列表下标
+                    end_idx = int(end_str)  # 包含该章节
+
+                    if 0 <= start_idx < end_idx <= len(chapter_urls):
+                        selected_titles = chapter_titles[start_idx:end_idx]
+                        selected_urls = chapter_urls[start_idx:end_idx]
+                        download_chapters(book_title, selected_titles, selected_urls)
+                        break
+                    else:
+                        print(f"请输入有效范围（1-{len(chapter_urls)}）")
+                except ValueError:
+                    print("格式错误，请输入类似 '1-220' 的范围")
             else:
-                print("输入无效，请输入 Y 或 N。")
+                print("输入无效，请输入 '1-220' 或 'all'")
+
+    input("按任意键结束...")
